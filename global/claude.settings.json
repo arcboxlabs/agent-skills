@@ -16,5 +16,9 @@
     "swift-lsp@claude-plugins-official": true
   },
   "showThinkingSummaries": true,
+  "theme": "auto",
+  "verbose": true,
+  "autoCompactEnabled": false,
+  "teammateMode": "auto",
   "skipAutoPermissionPrompt": true
 }
