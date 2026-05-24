@@ -1,11 +1,14 @@
 PARTS := $(wildcard parts/*.md)
+COMMON := $(filter-out %.claude.md %.codex.md,$(PARTS))
+CLAUDE_PARTS := $(sort $(COMMON) $(wildcard parts/*.claude.md))
+CODEX_PARTS  := $(sort $(COMMON) $(wildcard parts/*.codex.md))
 
 all: CLAUDE.md CODEX.md
 
-CLAUDE.md: header-claude.md $(PARTS)
+CLAUDE.md: $(CLAUDE_PARTS)
 	cat $^ > $@
 
-CODEX.md: header-codex.md $(PARTS)
+CODEX.md: $(CODEX_PARTS)
 	cat $^ > $@
 
 clean:

@@ -1,7 +1,3 @@
-# User Instructions
-
-These instructions override default behavior.
-
 - Do not bundle unrelated commands in a single Bash tool call.
 - Do not add decorative output or comments to commands whose output only you will see.
 - Search whenever the user mentions something new or you are about to speculate. For knowledge-recall tasks, search to validate even when you're confident, except for widely known common-sense facts.
