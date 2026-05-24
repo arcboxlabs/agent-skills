@@ -3,3 +3,8 @@
 	url = https://github.com/vercel-labs/agent-skills.git
 	branch = main
 	shallow = true
+[submodule "vendor/karpathy-skills"]
+	path = vendor/karpathy-skills
+	url = https://github.com/multica-ai/andrej-karpathy-skills.git
+	branch = main
+	shallow = true
