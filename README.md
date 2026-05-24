@@ -4,11 +4,14 @@ Use this repo as your user skills directory:
 
 ```bash
 git config core.hooksPath .githooks
+git submodule update --init
 mkdir -p ~/.agents
 ln -s "$PWD/skills" ~/.agents/skills
 # Claude Code
 ln -s "$PWD/skills" ~/.claude/skills
 ```
+
+`git submodule update --init` populates `vendor/vercel-agent-skills`, which the `skills/react-best-practices` symlink points into. The submodule is declared `shallow = true` in `.gitmodules`, so this fetches only the latest commit.
 
 ## Global Instructions
 
