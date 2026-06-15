@@ -2,12 +2,15 @@
 
 ## Structure
 
-Keep public APIs minimal. Structure code around durable boundaries, not short-term convenience. Prefer less code when clarity is preserved. Avoid duplicate logic by relying on types, validated interfaces, and existing guarantees.
+Keep public APIs minimal and elegant. Structure code around durable boundaries, not short-term convenience. Keep every file reasonably sized, and break it down when it gets large. Prefer less code when clarity is preserved. Avoid duplicate logic by relying on types, validated interfaces, and existing guarantees.
+Avoid over-defensive code. Pin down external guarantees instead of speculating about them: check official documentation, validate inputs once at the boundary (e.g., `zod`), verify real shapes empirically (e.g., `curl` the API), then trust those guarantees downstream.
+Let errors surface: fail fast and propagate with context. No silent fallbacks or catch-and-continue without user approval.
 
 ## Dependencies
 
-Prefer mature dependencies over bespoke code when they simplify the design. Remove dependencies that constrain the design.
+Prefer mature dependencies over bespoke code when they simplify the design. Remove or replace dependencies that constrain the design.
 Use the package manager for dependency changes so package names and versions come from current registry data, not memory. Hand-edit manifests only for details the package manager cannot express.
+When using a library, prefer the latest idiomatic APIs.
 
 ## Refactoring
 
@@ -20,10 +23,13 @@ If translating an idea from another language, rewrite it in the idioms of the ta
 ## Testing
 
 Add tests for new behavior and regressions, but never add tautological tests that mirror the implementation. Only test code that has meaningful logic (branching, transformations, error handling). Don't test code that can only break if the language, runtime, or a dependency breaks.
+When a test fails, fix the cause. Never weaken assertions, special-case the test's inputs in the implementation, or delete or skip failing tests without user approval.
 
 ## Documentation
 
-When behavior or a public API changes, update related comments and docs in the same change. Keep the README to purpose, usage, and a minimal example.
+When behavior or a public API changes, update related comments and docs in the same change.
+Keep comments concise. Only comment on non-obvious code. Update a comment only when it's wrong due to code change. Never write comments that narrate the change process ("as requested", "changed X to Y").
+Keep the README to purpose, usage, and a minimal example.
 
 ## Git
 
@@ -42,3 +48,4 @@ Any lint or type-check suppression must include a justification — use the lint
 
 Do not add shortcuts that bypass type checks, lint, or tests without user approval.
 Do not add environment-specific workarounds without user approval. Keep the implementation direct and clean.
+

@@ -6,9 +6,9 @@ Use this repo as your user skills directory:
 git config core.hooksPath .githooks
 git submodule update --init
 mkdir -p ~/.agents
-ln -s "$PWD/skills" ~/.agents/skills
+ln -s "$(realpath skills)" ~/.agents/skills
 # Claude Code
-ln -s "$PWD/skills" ~/.claude/skills
+ln -s "$(realpath skills)" ~/.claude/skills
 ```
 
 `git submodule update --init` populates `vendor/vercel-agent-skills`, which the `skills/react-best-practices` symlink points into. The submodule is declared `shallow = true` in `.gitmodules`, so this fetches only the latest commit.
@@ -19,13 +19,21 @@ Symlink the global instruction files:
 
 ```bash
 # Claude Code
-ln -s "$PWD/global/CLAUDE.md" ~/.claude/CLAUDE.md
-ln -s "$PWD/global/claude.settings.json" ~/.claude/settings.json
+ln -s "$(realpath global/CLAUDE.md)" ~/.claude/CLAUDE.md
+ln -s "$(realpath global/claude.settings.json)" ~/.claude/settings.json
 # Codex
-ln -s "$PWD/global/CODEX.md" ~/.codex/AGENTS.md
+ln -s "$(realpath global/CODEX.md)" ~/.codex/AGENTS.md
 ```
 
 Edit `global/parts/` — the pre-commit hook rebuilds automatically.
+
+## Preferred Tools
+
+The global instructions assume these CLI tools are available:
+
+```bash
+brew install ast-grep fd jq ripgrep sd yq
+```
 
 ## Available Skills
 
