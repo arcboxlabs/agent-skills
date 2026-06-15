@@ -6,10 +6,10 @@ CODEX_PARTS  := $(sort $(COMMON) $(wildcard parts/*.codex.md))
 all: CLAUDE.md CODEX.md
 
 CLAUDE.md: $(CLAUDE_PARTS)
-	cat $^ > $@
+	awk 'FNR==1 && NR!=1 {print ""} 1' $^ > $@
 
 CODEX.md: $(CODEX_PARTS)
-	cat $^ > $@
+	awk 'FNR==1 && NR!=1 {print ""} 1' $^ > $@
 
 clean:
 	rm -f CLAUDE.md CODEX.md
