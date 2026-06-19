@@ -13,6 +13,8 @@ ln -s "$(realpath skills)" ~/.claude/skills
 
 `git submodule update --init` populates `vendor/vercel-agent-skills`, which the `skills/react-best-practices` symlink points into. The submodule is declared `shallow = true` in `.gitmodules`, so this fetches only the latest commit.
 
+For Amp, `~/.config/amp/settings.json` can also point directly at this directory with `amp.skills.path`.
+
 ## Global Instructions
 
 Symlink the global instruction files:
@@ -30,6 +32,15 @@ ln -s "$(realpath global/CODEX.md)" ~/.codex/AGENTS.md
 
 Edit `global/parts/` — the pre-commit hook rebuilds automatically.
 
+## Global Review Checks
+
+Symlink the Amp review checks:
+
+```bash
+mkdir -p ~/.config/amp
+ln -s "$(realpath checks)" ~/.config/amp/checks
+```
+
 ## Preferred Tools
 
 The global instructions assume these CLI tools are available:
@@ -41,6 +52,7 @@ brew install ast-grep fd jq ripgrep sd yq
 ## Available Skills
 
 - [better-skill-creator](skills/better-skill-creator/SKILL.md): write better skills than the default
+- [browser-testing](skills/browser-testing/SKILL.md): browser automation with Playwright MCP
 - [rust-coding](skills/rust-coding/SKILL.md): write high-quality Rust code
 - [slides-creator](skills/slides-creator/SKILL.md): create new slide decks and `.pptx` presentations
 - [waku-idiomatic](skills/waku-idiomatic/SKILL.md): opinionated Waku patterns and structure

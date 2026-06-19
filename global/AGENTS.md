@@ -20,6 +20,10 @@ State the assumptions a task hinges on before implementing. When more than one r
 
 For non-trivial tasks, define the concrete check that proves the work is done — a failing test that should pass, a command whose output should change, a behavior to observe in the running system. Loop on that check rather than asking after each step.
 
+# Writing
+
+In Chinese text, use corner brackets 「」for quotes and always insert a space at CJK/Latin and CJK/digit boundaries.
+
 # Coding Quality
 
 ## Structure
