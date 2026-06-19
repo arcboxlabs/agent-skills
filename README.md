@@ -18,6 +18,9 @@ ln -s "$(realpath skills)" ~/.claude/skills
 Symlink the global instruction files:
 
 ```bash
+# Amp
+mkdir -p ~/.config/amp
+ln -s "$(realpath global/AGENTS.md)" ~/.config/amp/AGENTS.md
 # Claude Code
 ln -s "$(realpath global/CLAUDE.md)" ~/.claude/CLAUDE.md
 ln -s "$(realpath global/claude.settings.json)" ~/.claude/settings.json

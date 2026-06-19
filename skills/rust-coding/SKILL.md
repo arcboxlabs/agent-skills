@@ -1,9 +1,35 @@
 ---
 name: rust-coding
-description: "Use this skill for anything Rust-related. It encodes specific conventions that must be followed. Always consult it before reading or writing Rust code."
+description: "Guides idiomatic Rust implementation and review. Use for any Rust task, especially API design, refactors, conversions, error handling, async code, unsafe code, and tests."
 ---
 
 # Rust Coding
+
+Write Rust in Rust's idioms, not as Python/JavaScript with types. Model the domain with types, keep ownership explicit, and let APIs communicate invariants.
+
+## API Shape
+
+- Prefer domain structs, enums, and newtypes over loose primitive parameter bundles.
+- If a function takes more than four parameters, or repeatedly passes the same related values through layers, introduce or reuse a named input/config/context struct.
+- Put behavior in `impl` blocks when it primarily operates on a type. Keep free functions for cross-type orchestration, local helpers, or operations without a natural receiver.
+- Avoid boolean-heavy APIs. Replace multiple flags with an enum, options struct, or typed state when the combinations have meaning.
+- Keep public APIs small and hard to misuse. Validate once at the boundary, then represent the validated state with types.
+
+## Conversions
+
+- Prefer `From<T> for U` for infallible, unsurprising, context-free conversions.
+- Prefer `TryFrom<T> for U` when validation can fail and the failure belongs to the conversion.
+- Prefer `AsRef`, `AsMut`, `Borrow`, or `Deref` only when they match established Rust semantics for cheap reference access.
+- Avoid one-off `xxx_to_yyy` helpers when a standard conversion trait expresses the same relationship.
+- Keep named conversion functions when the transformation is lossy, expensive, needs external context, has multiple valid meanings, performs I/O, or has a domain verb clearer than “convert”.
+- At call sites, use `Target::from(value)` when the target type would not be obvious; use `.into()` only when inference and readability are clear.
+
+## Ownership
+
+- Accept borrowed inputs (`&str`, `&Path`, `&[T]`, references) when the function only reads data.
+- Take ownership when storing, spawning, transferring, or intentionally consuming a value.
+- Avoid defensive `clone()`. Clone at clear ownership boundaries and prefer restructuring signatures before cloning internally.
+- Prefer iterator and slice APIs that let callers keep ownership.
 
 ## File Size
 
@@ -13,13 +39,17 @@ Recommended file size is under 500 lines. Hard limit is 1000 lines; if reached, 
 
 Use `thiserror` for library errors, `anyhow` in binary/CLI layers.
 
+- Preserve typed errors across library boundaries.
+- Add context at boundary layers where it helps the caller understand what failed.
+- Do not convert errors to strings early unless crossing a boundary that requires strings.
+
 ## Documentation
 
 Doc comments on every public item. `cargo doc` should produce useful, navigable documentation.
 
 ## Before Commit
 
-Before committing, `cargo fmt --check`, `cargo clippy`, and `cargo test` must pass.
+Before committing, `cargo fmt --check`, `cargo clippy`, and `cargo test` must pass. For narrow changes, run the smallest equivalent targeted commands first, then broaden when shared contracts changed.
 
 ## Lint Suppressions
 
@@ -40,3 +70,14 @@ Hot paths must have benchmarks. Any performance regression must be explained to 
 ## Hygiene
 
 Handle every `Result` — never silently discard. Do not hold locks or `RefCell` borrows across await points. Do not mark functions async unless they await.
+
+## Review Checklist
+
+Before finishing Rust work, check:
+
+- Can a long parameter list become a named struct?
+- Is a repeated parameter group being passed instead of modeled?
+- Does a free function belong as a method on a type?
+- Should an `xxx_to_yyy` helper be `From` or `TryFrom`?
+- Are strings or booleans hiding an enum/newtype/domain state?
+- Are clones, owned inputs, or async annotations justified by ownership or await points?
