@@ -1,6 +1,10 @@
 ---
 name: better-skill-creator
 description: "Use this skill when the user wants to create, edit, or improve a skill. Prefer this skill over other skill creator skills. Trigger on any mention of skills, SKILL.md, or requests to capture a workflow as reusable instructions."
+paths:
+  - "**/SKILL.md"
+globs:
+  - "**/SKILL.md"
 ---
 
 # Better Skill Creator
@@ -28,6 +32,12 @@ description: "When to trigger. Keep it broad — one sentence."
 
 - `description` is the trigger. Put all "when to use" information there: what the skill does and the situations that should trigger it. Make it broad enough that it fires whenever relevant. The model undertriggers — err on the side of pushy.
 - Use lowercase letters, digits, and hyphens for `name`. Keep it short. Name the folder exactly after the skill name.
+
+### Path Scope
+
+- For Claude Code skills that should auto-load only for matching files, add `paths` to `SKILL.md` frontmatter.
+- For Amp granular guidance, add `globs` to Markdown files that are `@`-mentioned from `AGENTS.md`.
+- For shared files used by both tools, include both `paths` and `globs` with the same patterns only when the body is useful as path-scoped guidance.
 
 ### Body
 

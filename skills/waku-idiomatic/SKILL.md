@@ -1,6 +1,10 @@
 ---
 name: waku-idiomatic
 description: "Use whenever a Waku project is involved. Trigger on any mention of Waku, waku.gg, or React Server Components in a Waku context."
+paths:
+  - "**/waku.config.*"
+globs:
+  - "**/waku.config.*"
 ---
 
 # Idiomatic Waku

@@ -10,6 +10,12 @@ These are personal global instructions for Amp. Repository `AGENTS.md` files and
 - Code is the primary source of truth. Read local code first; use external docs or web research only when local code is insufficient.
 - For non-HTML or source artifacts, prefer CLI tools, repository source, or direct downloads over webpage extraction.
 
+# Path-Scoped Guidance
+
+See @~/.agents/skills/better-skill-creator/SKILL.md.
+See @~/.agents/skills/rust-coding/SKILL.md.
+See @~/.agents/skills/waku-idiomatic/SKILL.md.
+
 # Workflow
 
 ## Decisions
