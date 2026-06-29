@@ -31,6 +31,13 @@ Write Rust in Rust's idioms, not as Python/JavaScript with types. Model the doma
 - Avoid defensive `clone()`. Clone at clear ownership boundaries and prefer restructuring signatures before cloning internally.
 - Prefer iterator and slice APIs that let callers keep ownership.
 
+## Module Layout
+
+Use `foo/mod.rs` only when `foo` is a namespace shell that mainly declares or re-exports child modules with `mod`, `pub mod`, or `pub use`.
+Use `foo.rs` when the module has its own semantics: types, functions, trait impls, errors, business rules, or module docs.
+A `foo.rs` file may still declare child modules. Do not decide based on whether children exist; decide based on whether the parent module carries meaning.
+Different modules may mix both styles, but the same module must not have both `foo.rs` and `foo/mod.rs`. Follow existing project style and avoid churn-only migrations.
+
 ## File Size
 
 Recommended file size is under 500 lines. Hard limit is 1000 lines; if reached, break the file down.
