@@ -3,43 +3,32 @@
 Use this repo as your user skills directory:
 
 ```bash
-git config core.hooksPath .githooks
-git submodule update --init
-mkdir -p ~/.agents
-ln -s "$(realpath skills)" ~/.agents/skills
-# Claude Code
-ln -s "$(realpath skills)" ~/.claude/skills
+./install.sh
 ```
 
 `git submodule update --init` populates `vendor/vercel-agent-skills`, which the `skills/react-best-practices` symlink points into. The submodule is declared `shallow = true` in `.gitmodules`, so this fetches only the latest commit.
 
-For Amp, `~/.config/amp/settings.json` can also point directly at this directory with `amp.skills.path`.
+For Amp, `~/.config/amp/settings.json` can also point directly at this directory with `amp.skills.path`. Keep `~/.agents/skills` linked too; Amp path-scoped guidance `@`-mentions that path.
 
 ## Global Instructions
 
-Symlink the global instruction files:
+`install.sh` symlinks:
+
+- Amp: `global/AGENTS.md`, `checks/`, and `~/.agents/skills`
+- Claude Code: `global/CLAUDE.md` and each skill under `~/.claude/skills/`
+- Codex: `global/CODEX.md` and each skill under `~/.codex/skills/`
+
+Check an existing install without changing links:
 
 ```bash
-# Amp
-mkdir -p ~/.config/amp
-ln -s "$(realpath global/AGENTS.md)" ~/.config/amp/AGENTS.md
-# Claude Code
-ln -s "$(realpath global/CLAUDE.md)" ~/.claude/CLAUDE.md
-ln -s "$(realpath global/claude.settings.json)" ~/.claude/settings.json
-# Codex
-ln -s "$(realpath global/CODEX.md)" ~/.codex/AGENTS.md
+./install.sh --check
 ```
 
 Edit `global/parts/` — the pre-commit hook rebuilds automatically.
 
-## Global Review Checks
+`global/claude.settings.json` is a reference settings file. Merge it manually instead of symlinking it over an existing `~/.claude/settings.json`.
 
-Symlink the Amp review checks:
-
-```bash
-mkdir -p ~/.config/amp
-ln -s "$(realpath checks)" ~/.config/amp/checks
-```
+Path-scoped guidance uses Claude Code `paths` and Amp `globs` frontmatter in skill files. For Amp, add or remove `@` mentions in `global/parts/20-path-scoped.amp.md`.
 
 ## Preferred Tools
 
