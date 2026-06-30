@@ -42,6 +42,7 @@ brew install ast-grep fd jq ripgrep sd yq
 
 - [better-skill-creator](skills/better-skill-creator/SKILL.md): write better skills than the default
 - [browser-testing](skills/browser-testing/SKILL.md): browser automation with Playwright MCP
+- [linear](skills/linear/SKILL.md): ArcBox Linear workflow — issue lifecycle, comment-driven sync, status, triage
 - [rust-coding](skills/rust-coding/SKILL.md): write high-quality Rust code
 - [slides-creator](skills/slides-creator/SKILL.md): create new slide decks and `.pptx` presentations
 - [waku-idiomatic](skills/waku-idiomatic/SKILL.md): opinionated Waku patterns and structure
